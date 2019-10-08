@@ -10,7 +10,7 @@ const options = {
     '@primary-color',
   ],
   indexFileName: 'index.html',
-  outputFilePath: path.join(__dirname,'/react-antd-admin' './public/color.less'),
+  outputFilePath: path.join(__dirname,'/react-antd-admin','./public/color.less'),
 };
 
 generateTheme(options).then(less => {
