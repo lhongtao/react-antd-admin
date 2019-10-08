@@ -24,7 +24,7 @@
     "redux-thunk": "^2.3.0",
     "screenfull": "^4.2.1"
   },
-  "homepage": "https://lhongtao.github.io/github-actions-demo",
+  "homepage": "https://lhongtao.github.io/react-antd-admin",
   "scripts": {
     "start": "set PORT=8888 && npm run color && react-app-rewired start",
     "build": "react-app-rewired build",
