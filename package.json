@@ -24,8 +24,9 @@
     "redux-thunk": "^2.3.0",
     "screenfull": "^4.2.1"
   },
+  "homepage": "https://lhongtao.github.io/github-actions-demo",
   "scripts": {
-    "start": "npm run color && react-app-rewired start",
+    "start": "set PORT=8888 && npm run color && react-app-rewired start",
     "build": "react-app-rewired build",
     "color": "node color.js",
     "test": "react-app-rewired test --env=jsdom",
