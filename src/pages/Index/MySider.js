@@ -53,7 +53,7 @@ class MySider extends React.Component {
         <div className={`sider-menu-logo ${theme}`}>
           <a href="https://ant.design/docs/react/introduce-cn" target="_blank" rel="noopener noreferrer">
             <img src={require('../../icons/svg/antd.svg')} alt="" />
-            <h1>React Antd</h1>
+            <h1>后台管理系统</h1>
           </a>
         </div>
         <Menu theme={theme} mode="inline" selectedKeys={[activeMenu]} style={{ paddingTop: 16 }}>

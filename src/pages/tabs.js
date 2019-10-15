@@ -2,8 +2,14 @@ import React from 'react'
 import LoadableComponent from '../utils/LoadableComponent'
 const Users = LoadableComponent(import('./Users/index'), true);
 const About = LoadableComponent(import('./About/index'), true);
+const Home = LoadableComponent(import('./Home/index'), true);
 
 const menu = [
+  {
+    name: '首页',
+    icon: 'home',
+    key: 'Home',
+  },
   {
     name: '权限管理',
     icon: 'lock',
@@ -94,8 +100,8 @@ const menu = [
 
 const tabs = {
   Users: <Users />,
-  About: <About />
-
+  About: <About />,
+  Home: <Home />,
 }
 
 export { menu,tabs }
