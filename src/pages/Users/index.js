@@ -75,7 +75,8 @@ class User extends React.Component {
     await this.setState({
         pagination: page
     })
-    this.getUsers(page.current)
+    console.log(page.current)
+    // this.getUsers(page.current)
   }
 
   onDateChange = (value, dateString) => {
@@ -97,12 +98,41 @@ class User extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
+    const { loading, selectedRowKeys } = this.state;
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.onSelectChange,
+    };
+    const hasSelected = selectedRowKeys.length > 0;
+    const columns = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+      },
+      {
+        title: 'Age',
+        dataIndex: 'age',
+      },
+      {
+        title: 'Address',
+        dataIndex: 'address',
+      },
+    ];
+    const data = [];
+    for (let i = 0; i < 46; i++) {
+      data.push({
+        key: i,
+        name: `Edward King ${i}`,
+        age: 32,
+        address: `London, Park Lane no. ${i}`,
+      });
+    }
     return (
       <div style={{ padding: 24 }}>
         <Card bordered={false}>
           <Form layout="inline" style={{ marginBottom: 16 }}>
-            <Row>
-              <Col span={6}>
+            <Row type='flex'>
+              <Col>
                 <Form.Item>
                   {getFieldDecorator('username')(
                     <Input
@@ -112,7 +142,7 @@ class User extends React.Component {
                   )}
                 </Form.Item>
               </Col>
-              <Col span={10}>
+              <Col>
                 <Form.Item>
                   {getFieldDecorator('startTime')(
                     <RangePicker
@@ -125,13 +155,24 @@ class User extends React.Component {
                   )}
                 </Form.Item>    
               </Col>
-              <Col span={4}>
+              <Col>
                 <Form.Item>
                   <Button type="primary" icon='search' onClick={this.onSearch}>搜索</Button>
                 </Form.Item>
               </Col>
             </Row>
           </Form>
+          <div style={{ marginBottom: 16, textAlign: 'right' }}>
+            <Button type='primary' icon='plus' onClick={() => this.toggleShowCreateModal(true)}>新增</Button>&emsp;
+            <Button type='danger' icon='delete' disabled={!selectedRowKeys.length}>批量删除</Button>
+          </div>
+          <Table
+            bordered
+            columns={columns}
+            dataSource={data}
+            rowSelection={rowSelection}
+            onChange={this.onTableChange}
+          />
         </Card>
       </div>
     );
