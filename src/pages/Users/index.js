@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, Card, Form, Input, Button, DatePicker , message, Icon, Row, Col, Divider, Modal, Popconfirm, notification } from 'antd'
+import moment from 'moment'
 // import InfoModal from './InfoModal'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -73,7 +74,7 @@ class User extends React.Component {
    */
   onTableChange = async (page) => {
     await this.setState({
-        pagination: page
+      pagination: page
     })
     console.log(page.current)
     // this.getUsers(page.current)
@@ -95,10 +96,55 @@ class User extends React.Component {
     console.log(fields)
     // this.getUsers()
   }
-
+  
+  onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ selectedRowKeys });
+  };
+  /**
+   * 打开用户信息模特框，并初始化用户信息回显
+   */
+  showInfoModal = (record) => {
+    const registrationAddress = record.registrationAddress ? JSON.parse(record.registrationAddress) : {}
+    const lastLoginAddress = record.lastLoginAddress ? JSON.parse(record.lastLoginAddress) : {}
+    const userInfo = {
+        username: record.username,
+        gender: record.gender,
+        rIp: registrationAddress.ip,
+        rTime: record.registrationTime && moment(record.registrationTime).format('YYYY-MM-DD HH:mm:ss'),
+        rNation: registrationAddress.ad_info.nation,
+        rProvince: registrationAddress.ad_info.province,
+        rCity: `${registrationAddress.ad_info.city}（${registrationAddress.ad_info.district}）`,
+        lastLoginAddress: lastLoginAddress.ip && `${lastLoginAddress.ip}（${lastLoginAddress.ad_info.city}）`,
+        lastLoginTime: record.lastLoginTime && moment(record.lastLoginTime).format('YYYY-MM-DD HH:mm:ss')
+    }
+    this.setState({
+        isShowInfoModal: true,
+        userInfo: userInfo
+    })
+  }
+  /**
+   * 单条删除
+   */
+  singleDelete = async (record) => {
+    const res = await json.post('/user/delete', {
+        ids: [record.id]
+    })
+    if (res.status === 0) {
+        notification.success({
+            message: '删除成功',
+            description: '3秒后自动退出登录',
+            duration: 3
+        })
+        logout()
+        setTimeout(() => {
+            this.props.history.push('/login')
+        }, 3000)
+    }
+  }
   render() {
     const { getFieldDecorator } = this.props.form
-    const { loading, selectedRowKeys } = this.state;
+    const { users, usersLoading, pagination, userInfo, isShowInfoModal, selectedRowKeys, isShowCreateModal } = this.state
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -106,25 +152,83 @@ class User extends React.Component {
     const hasSelected = selectedRowKeys.length > 0;
     const columns = [
       {
-        title: 'Name',
-        dataIndex: 'name',
+        title: '序号',
+        key: 'num',
+        align: 'center',
+        render: (text, record, index) => {
+            let num = (pagination.current - 1) * 10 + index + 1
+            if (num < 10) {
+                num = '0' + num
+            }
+            return num
+        }
       },
       {
-        title: 'Age',
-        dataIndex: 'age',
+        title: '用户名',
+        dataIndex: 'username',
+        align: 'center'
       },
       {
-        title: 'Address',
-        dataIndex: 'address',
+        title: '注册地址',
+        dataIndex: 'registrationAddress',
+        align: 'center',
+        // render: (text) => {
+        //   return `${text}`
+        //   const info = text && JSON.parse(text)
+        //   if (info) {
+        //       return `${info.ip}（${info.ad_info.city}）`
+        //   }
+        // }
+      },
+      {
+        title: '注册时间',
+        dataIndex: 'registrationTime',
+        align: 'center',
+        render: (text) => text && moment(text).format('YYYY-MM-DD HH:mm:ss'),
+        sorter: true
+      },
+      {
+        title: '上一次登陆地址',
+        dataIndex: 'lastLoginAddress',
+        align: 'center',
+      },
+      {
+        title: '身份',
+        dataIndex: 'isAdmin',
+        align: 'center',
+        render: (text) => text ? '管理员' : '超级管理员',
+      },
+      {
+        title: '操作',
+        key: 'active',
+        align: 'center',
+        render: (text, record) => (
+            <div style={{ textAlign: 'left' }}>
+                <span className='my-a' onClick={() => this.showInfoModal(record)}><Icon type="eye" /> 查看</span>
+                {
+                    this.props.user.username === record.username &&
+                    <Popconfirm title='您确定删除当前用户吗？' onConfirm={() => this.singleDelete(record)}>
+                        <span className='my-a'><Divider type='vertical' /><Icon type='delete' /> 删除</span>
+                    </Popconfirm>
+                }
+            </div>
+        )
       },
     ];
     const data = [];
-    for (let i = 0; i < 46; i++) {
+    for (let i = 0; i < 3; i++) {
       data.push({
-        key: i,
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`,
+        birth: null,
+        gender: null,
+        id: i,
+        isAdmin: i,
+        lastLoginAddress: '上海',
+        lastLoginTime: 1571189723772,
+        location: null,
+        phone: null,
+        registrationAddress: '北京',
+        registrationTime: 1571187249221,
+        username: "test" + (i + 1),
       });
     }
     return (
@@ -168,7 +272,9 @@ class User extends React.Component {
           </div>
           <Table
             bordered
+            rowKey='id'
             columns={columns}
+            pagination={pagination}
             dataSource={data}
             rowSelection={rowSelection}
             onChange={this.onTableChange}
