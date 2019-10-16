@@ -3,6 +3,7 @@ import LoadableComponent from '../utils/LoadableComponent'
 const Users = LoadableComponent(import('./Users/index'), true);
 const About = LoadableComponent(import('./About/index'), true);
 const Home = LoadableComponent(import('./Home/index'), true);
+const System = LoadableComponent(import('./System/index'), true);
 
 const menu = [
   {
@@ -18,7 +19,7 @@ const menu = [
   {
     name: '组件',
     icon: 'appstore',
-    key: 'conponents',
+    key: 'components',
     children: [
       {
         name: '富文本编辑器',
@@ -92,6 +93,28 @@ const menu = [
     ]
   },
   {
+    name: '栏目管理',
+    icon: 'project',
+    key: 'Columns',
+    children: [
+      {
+        name: '客户列表',
+        icon: '',
+        key: 'UserList',
+      },
+      {
+        name: '团队列表',
+        icon: '',
+        key: 'CompanyList',
+      },
+    ]
+  },
+  {
+    name: '系统管理',
+    icon: 'setting',
+    key: 'System',
+  },
+  {
     name: '关于',
     icon: 'info-circle',
     key: 'About'
@@ -102,6 +125,7 @@ const tabs = {
   Users: <Users />,
   About: <About />,
   Home: <Home />,
+  System: <System />,
 }
 
 export { menu,tabs }

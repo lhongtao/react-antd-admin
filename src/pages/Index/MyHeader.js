@@ -102,7 +102,7 @@ class MyHeader extends React.Component {
       <div style={{ background: '#fff', padding: '0 16px' }}>
         <Icon
           className="trigger"
-          type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+          type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={this.toggleCollapsed}
         />
         <div style={styles.headerRight}>

@@ -104,13 +104,12 @@ class User extends React.Component {
    * 打开用户信息模特框，并初始化用户信息回显
    */
   showInfoModal = (record) => {
-    const registrationAddress = record.registrationAddress ? record.registrationAddress : ''
-    const lastLoginAddress = record.lastLoginAddress ? record.lastLoginAddress : ''
     const userInfo = {
         username: record.username,
         gender: record.gender,
         rTime: record.registrationTime && moment(record.registrationTime).format('YYYY-MM-DD HH:mm:ss'),
-        lastLoginAddress: lastLoginAddress,
+        lastLoginAddress: record.lastLoginAddress,
+        registrationAddress: record.registrationAddress,
         lastLoginTime: record.lastLoginTime && moment(record.lastLoginTime).format('YYYY-MM-DD HH:mm:ss')
     }
     this.setState({
