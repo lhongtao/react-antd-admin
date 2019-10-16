@@ -1,10 +1,9 @@
 import React from 'react';
 import { Table, Card, Form, Input, Button, DatePicker , message, Icon, Row, Col, Divider, Modal, Popconfirm, notification } from 'antd'
 import moment from 'moment'
-// import InfoModal from './InfoModal'
+import InfoModal from './InfoModal'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-// import CreateUserModal from './CreateUserModal'
 
 const { RangePicker } = DatePicker;
 const store = connect(
@@ -77,7 +76,7 @@ class User extends React.Component {
       pagination: page
     })
     console.log(page.current)
-    // this.getUsers(page.current)
+    console.log(this.props.user)
   }
 
   onDateChange = (value, dateString) => {
@@ -105,43 +104,49 @@ class User extends React.Component {
    * 打开用户信息模特框，并初始化用户信息回显
    */
   showInfoModal = (record) => {
-    const registrationAddress = record.registrationAddress ? JSON.parse(record.registrationAddress) : {}
-    const lastLoginAddress = record.lastLoginAddress ? JSON.parse(record.lastLoginAddress) : {}
+    const registrationAddress = record.registrationAddress ? record.registrationAddress : ''
+    const lastLoginAddress = record.lastLoginAddress ? record.lastLoginAddress : ''
     const userInfo = {
         username: record.username,
         gender: record.gender,
-        rIp: registrationAddress.ip,
         rTime: record.registrationTime && moment(record.registrationTime).format('YYYY-MM-DD HH:mm:ss'),
-        rNation: registrationAddress.ad_info.nation,
-        rProvince: registrationAddress.ad_info.province,
-        rCity: `${registrationAddress.ad_info.city}（${registrationAddress.ad_info.district}）`,
-        lastLoginAddress: lastLoginAddress.ip && `${lastLoginAddress.ip}（${lastLoginAddress.ad_info.city}）`,
+        lastLoginAddress: lastLoginAddress,
         lastLoginTime: record.lastLoginTime && moment(record.lastLoginTime).format('YYYY-MM-DD HH:mm:ss')
     }
     this.setState({
         isShowInfoModal: true,
         userInfo: userInfo
     })
+    console.log(userInfo)
   }
   /**
    * 单条删除
    */
   singleDelete = async (record) => {
-    const res = await json.post('/user/delete', {
-        ids: [record.id]
-    })
+    // const res = await json.post('/user/delete', {
+    //     ids: [record.id]
+    // })
+    const res = {
+      status: 0
+    }
     if (res.status === 0) {
-        notification.success({
-            message: '删除成功',
-            description: '3秒后自动退出登录',
-            duration: 3
-        })
-        logout()
-        setTimeout(() => {
-            this.props.history.push('/login')
-        }, 3000)
+      notification.success({
+          message: '删除成功',
+          description: '3秒后自动退出登录',
+          duration: 3
+      })
     }
   }
+  /**
+   * 关闭用户信息模态框
+   */
+  closeInfoModal = () => {
+    this.setState({
+        isShowInfoModal: false,
+        userInfo: {}
+    })
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form
     const { users, usersLoading, pagination, userInfo, isShowInfoModal, selectedRowKeys, isShowCreateModal } = this.state
@@ -172,13 +177,6 @@ class User extends React.Component {
         title: '注册地址',
         dataIndex: 'registrationAddress',
         align: 'center',
-        // render: (text) => {
-        //   return `${text}`
-        //   const info = text && JSON.parse(text)
-        //   if (info) {
-        //       return `${info.ip}（${info.ad_info.city}）`
-        //   }
-        // }
       },
       {
         title: '注册时间',
@@ -203,7 +201,7 @@ class User extends React.Component {
         key: 'active',
         align: 'center',
         render: (text, record) => (
-            <div style={{ textAlign: 'left' }}>
+            <div style={{ textAlign: 'center' }}>
                 <span className='my-a' onClick={() => this.showInfoModal(record)}><Icon type="eye" /> 查看</span>
                 {
                     this.props.user.username === record.username &&
@@ -228,7 +226,7 @@ class User extends React.Component {
         phone: null,
         registrationAddress: '北京',
         registrationTime: 1571187249221,
-        username: "test" + (i + 1),
+        username: '张三',
       });
     }
     return (
@@ -267,7 +265,7 @@ class User extends React.Component {
             </Row>
           </Form>
           <div style={{ marginBottom: 16, textAlign: 'right' }}>
-            <Button type='primary' icon='plus' onClick={() => this.toggleShowCreateModal(true)}>新增</Button>&emsp;
+            <Button type='primary' icon='plus'>新增</Button>&emsp;
             <Button type='danger' icon='delete' disabled={!selectedRowKeys.length}>批量删除</Button>
           </div>
           <Table
@@ -280,6 +278,7 @@ class User extends React.Component {
             onChange={this.onTableChange}
           />
         </Card>
+        <InfoModal visible={isShowInfoModal} userInfo={userInfo} onCancel={this.closeInfoModal} />
       </div>
     );
   }

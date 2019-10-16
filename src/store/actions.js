@@ -14,6 +14,7 @@ export function setUser(user) {
 export function getUser(param) {
   return async function (dispatch) {
     // const res = await json.get('/user/getUser', param)
-    dispatch(setUser('张三' || {}))
+    const res = 0
+    dispatch(setUser(res || { username: '张三' }))
   }
 }

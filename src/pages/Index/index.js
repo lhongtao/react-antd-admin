@@ -35,7 +35,7 @@ class Index extends React.Component {
    */
   init = async () => {
     const username = localStorage.getItem('username')
-    // await this.props.getUser({ username })
+    await this.props.getUser({ username })
     console.log(this.props.user)
     // this.props.initWebSocket(this.props.user)
   }
