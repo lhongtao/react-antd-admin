@@ -4,6 +4,7 @@ const Users = LoadableComponent(import('./Users/index'), true);
 const About = LoadableComponent(import('./About/index'), true);
 const Home = LoadableComponent(import('./Home/index'), true);
 const System = LoadableComponent(import('./System/index'), true);
+const BrandList = LoadableComponent(import('../views/brand/BrandList'), true);
 
 const menu = [
   {
@@ -100,7 +101,7 @@ const menu = [
       {
         name: '客户列表',
         icon: '',
-        key: 'UserList',
+        key: 'BrandList',
       },
       {
         name: '团队列表',
@@ -126,6 +127,7 @@ const tabs = {
   About: <About />,
   Home: <Home />,
   System: <System />,
+  BrandList: <BrandList />,
 }
 
 export { menu,tabs }
