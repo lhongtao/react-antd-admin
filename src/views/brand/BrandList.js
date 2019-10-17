@@ -132,18 +132,18 @@ class BrandList extends Component {
     })
   }
   getUserList = async () => {
-    // -----------------------------------
-    await axios.get(API + DEFAULT_QUERY)
-      .then(result => this.setState({
+    try {
+      const result = await axios.get(API + DEFAULT_QUERY);
+      this.setState({
         hits: result.data.hits,
-    // -----------------------------------
         isLoading: false
-      }))
-      .catch(error => this.setState({
+      });
+    } catch (error) {
+      this.setState({
         error,
         isLoading: false
-      }));
-    this.setState({ isLoading: true });
+      });
+    }
   }
 
   components = {

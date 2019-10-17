@@ -99,7 +99,7 @@ const menu = [
     key: 'Columns',
     children: [
       {
-        name: '产品列表',
+        name: '品牌列表',
         icon: '',
         key: 'BrandList',
       },
