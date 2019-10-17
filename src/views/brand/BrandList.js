@@ -114,7 +114,7 @@ class BrandList extends Component {
       key: record.key,
       date: record.date,
       name: record.name,
-      image: record.image.split(','),
+      image: record.image,
       note: record.note,
     }
     this.setState({
@@ -157,21 +157,21 @@ class BrandList extends Component {
       key: 0,
       date: '2019-10-16 08:54:09',
       name: '108匠',
-      image: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2350171032,3227234175&fm=26&gp=0.jpg',
+      image: 'http://img2.imgtn.bdimg.com/it/u=261207652,4063938572&fm=26&gp=0.jpg',
       note: '这是一段描述内容,这是一段描述内容,这是一段描述内容,这是一段描述内容.',
     },
     {
       key: 1,
       date: '2019-10-16 08:54:09',
       name: '咪咕烤鱼',
-      image: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2350171032,3227234175&fm=26&gp=0.jpg',
+      image: 'http://img0.imgtn.bdimg.com/it/u=2703858994,1545424298&fm=26&gp=0.jpg',
       note: '这是一段描述内容,这是一段描述内容,这是一段描述内容,这是一段描述内容.',
     },
     {
       key: 2,
       name: '蘑菇香香鸡',
       date: '2019-10-16 08:54:09',
-      image: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2350171032,3227234175&fm=26&gp=0.jpg',
+      image: 'http://img1.imgtn.bdimg.com/it/u=175316181,3173274562&fm=15&gp=0.jpg',
       note: '这是一段描述内容,这是一段描述内容,这是一段描述内容,这是一段描述内容.',
     },
   ];

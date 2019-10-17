@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Row, Col, Form, Input, Button, Upload, Icon, notification } from 'antd'
 import { createFormField } from '../../utils/util'
 import './style.less'
+const { TextArea } = Input;
 
 const form = Form.create({
   //表单回显
@@ -70,9 +71,12 @@ class BrandInfoModal extends React.Component {
                 </Button>
               </Upload>,
             )}
+            <div className="brand-form-image">
+              <img src={brandInfo.image} />
+            </div>
           </Form.Item>
           <Form.Item label="描述">
-            {getFieldDecorator('note', {})(<Input />)}
+            {getFieldDecorator('note', {})(<TextArea rows={4} />)}
           </Form.Item>
         </Form>
       </Modal>
