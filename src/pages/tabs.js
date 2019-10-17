@@ -4,7 +4,7 @@ const Users = LoadableComponent(import('./Users/index'), true);
 const About = LoadableComponent(import('./About/index'), true);
 const Home = LoadableComponent(import('./Home/index'), true);
 const System = LoadableComponent(import('./System/index'), true);
-const BrandList = LoadableComponent(import('../views/brand/BrandList'), true);
+const BrandList = LoadableComponent(import('@/views/brand/BrandList'), true);
 
 const menu = [
   {
@@ -99,14 +99,9 @@ const menu = [
     key: 'Columns',
     children: [
       {
-        name: '客户列表',
+        name: '产品列表',
         icon: '',
         key: 'BrandList',
-      },
-      {
-        name: '团队列表',
-        icon: '',
-        key: 'CompanyList',
       },
     ]
   },
