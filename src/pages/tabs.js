@@ -5,6 +5,9 @@ const About = LoadableComponent(import('./About/index'), true);
 const Home = LoadableComponent(import('./Home/index'), true);
 const System = LoadableComponent(import('./System/index'), true);
 const BrandList = LoadableComponent(import('@/views/brand/BrandList'), true);
+const BackToTop = LoadableComponent(import('@/components/BackToTop/index'), true);
+const ErrorThird = LoadableComponent(import('@/components/Result/R403'), true);
+const ErrorFour = LoadableComponent(import('@/components/Result/R404'), true);
 
 const menu = [
   {
@@ -27,11 +30,11 @@ const menu = [
         icon: '',
         key: 'Tinymce',
       },
-      {
-        name: 'MarkDown',
-        icon: '',
-        key: 'MarkDown',
-      },
+      // {
+      //   name: 'MarkDown',
+      //   icon: '',
+      //   key: 'MarkDown',
+      // },
       {
         name: '头像上传',
         icon: '',
@@ -47,44 +50,44 @@ const menu = [
         icon: '',
         key: 'DndList',
       },
-      {
-        name: '返回顶部',
-        icon: '',
-        key: 'BackToTop',
-      },
+      // {
+      //   name: '返回顶部',
+      //   icon: '',
+      //   key: 'BackToTop',
+      // },
     ]
   },
+  // {
+  //   name: '图表',
+  //   icon: 'pie-chart',
+  //   key: 'Charts',
+  //   children: [
+  //     {
+  //       name: '键盘图表',
+  //       icon: '',
+  //       key: 'KeyboardChart',
+  //     },
+  //     {
+  //       name: '折线图',
+  //       icon: '',
+  //       key: 'LineChart',
+  //     },
+  //     {
+  //       name: '混合图表',
+  //       icon: '',
+  //       key: 'MixChart',
+  //     },
+  //   ]
+  // },
   {
-    name: '图表',
-    icon: 'pie-chart',
-    key: 'Charts',
-    children: [
-      {
-        name: '键盘图表',
-        icon: '',
-        key: 'KeyboardChart',
-      },
-      {
-        name: '折线图',
-        icon: '',
-        key: 'LineChart',
-      },
-      {
-        name: '混合图表',
-        icon: '',
-        key: 'MixChart',
-      },
-    ]
-  },
-  {
-    name: '错误页面',
+    name: '结果页面',
     icon: 'question-circle',
     key: 'error',
     children: [
       {
-        name: '401',
+        name: '403',
         icon: '',
-        key: 'ErrorOne',
+        key: 'ErrorThird',
       },
       {
         name: '404',
@@ -123,6 +126,9 @@ const tabs = {
   Home: <Home />,
   System: <System />,
   BrandList: <BrandList />,
+  BackToTop: <BackToTop />,
+  ErrorFour: <ErrorFour />,
+  ErrorThird: <ErrorThird />
 }
 
 export { menu,tabs }

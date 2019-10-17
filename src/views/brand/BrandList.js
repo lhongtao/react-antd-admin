@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Card, Button, Table, Icon, Popconfirm, Divider, notification } from 'antd'
 import { Resizable } from 'react-resizable';
-import BrandInfoModal from './InfoModal'
+import BrandInfoModal from './FormEdit'
+import BrandInfoAdd from './FormAdd'
 import './style.less'
 
 const API = 'https://hn.algolia.com/api/v1/search?query=';
@@ -36,6 +37,7 @@ class BrandList extends Component {
       data: null,
       isLoading: false,
       isShowInfoModal: false,
+      isShowFormAdd: false,
       brandInfo: {},   //当前行的信息
       pagination: {
         total: 0,
@@ -122,11 +124,19 @@ class BrandList extends Component {
       brandInfo: info
     })
   }
+
+  togglesShowAddModal = (visible) => {
+    this.setState({
+      isShowFormAdd: visible,
+    })
+  }
+  
   /**
    * 关闭用户信息模态框
    */
   closeInfoModal = () => {
     this.setState({
+        isShowFormAdd: false,
         isShowInfoModal: false,
         brandInfo: {}
     })
@@ -223,7 +233,7 @@ class BrandList extends Component {
   }
 
   render() {
-    const { pagination, selectedRowKeys, brandInfo, isShowInfoModal } = this.state
+    const { pagination, selectedRowKeys, brandInfo, isShowInfoModal, isShowFormAdd } = this.state
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -241,7 +251,7 @@ class BrandList extends Component {
         <Card bordered={false}>
          <div className="brand-container">
             <div style={{ marginBottom: 16, textAlign: 'right' }}>
-              <Button type='primary' icon='plus'>新增</Button>&emsp;
+              <Button type='primary' icon='plus' onClick={() => this.togglesShowAddModal(true)}>新增</Button>&emsp;
               <Button type='danger' icon='delete' disabled={!selectedRowKeys.length}>批量删除</Button>
             </div>
             <Table 
@@ -256,6 +266,7 @@ class BrandList extends Component {
           </div>  
         </Card>
         <BrandInfoModal visible={isShowInfoModal} brandInfo={brandInfo} onCancel={this.closeInfoModal} />
+        <BrandInfoAdd visible={isShowFormAdd} onCancel={this.closeInfoModal} />
       </div>
     )  
   }    
