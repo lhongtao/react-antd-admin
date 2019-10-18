@@ -8,6 +8,7 @@ const BrandList = LoadableComponent(import('@/views/brand/BrandList'), true);
 const BackToTop = LoadableComponent(import('@/components/BackToTop/index'), true);
 const ErrorThird = LoadableComponent(import('@/components/Result/R403'), true);
 const ErrorFour = LoadableComponent(import('@/components/Result/R404'), true);
+const Tinymce = LoadableComponent(import('@/components/Tinymce/index'), true);
 
 const menu = [
   {
@@ -128,7 +129,8 @@ const tabs = {
   BrandList: <BrandList />,
   BackToTop: <BackToTop />,
   ErrorFour: <ErrorFour />,
-  ErrorThird: <ErrorThird />
+  ErrorThird: <ErrorThird />,
+  Tinymce: <Tinymce />,
 }
 
 export { menu,tabs }
