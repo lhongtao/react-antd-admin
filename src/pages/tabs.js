@@ -42,11 +42,6 @@ const menu = [
         key: 'AvatarUpload',
       },
       {
-        name: 'Dropzone',
-        icon: '',
-        key: 'Dropzone',
-      },
-      {
         name: '列表拖拽',
         icon: '',
         key: 'DndList',

@@ -1,6 +1,6 @@
 import 'braft-editor/dist/index.css'
 import React from 'react'
-import { Card, Upload, Icon } from 'antd'
+import { Card, Upload, Icon, Divider  } from 'antd'
 import './style.less'
 import BraftEditor from 'braft-editor'
 
@@ -53,6 +53,7 @@ class EditorPage extends React.Component {
         <div style={{ padding: 24 }}>
           <Card bordered={false}>
             <h3>富文本是管理后台一个核心的功能，但同时又是一个有很多坑的地方。本文选择的是Braft-Editor.</h3>
+            <Divider>富文本编辑器</Divider>
             <div className="editor-wrapper">
               <BraftEditor 
                 value={editorState} 
