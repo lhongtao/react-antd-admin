@@ -67,7 +67,7 @@ class BrandList extends Component {
         {
           title: '图片',
           dataIndex: 'image',
-          render: (text, record) => ( 
+          render: (text, record) => (
             <div><img src={text}/></div>
           ),
           width: 40,
@@ -97,10 +97,10 @@ class BrandList extends Component {
     };
   }
 
-  componentDidMount() { //  This is a good place to instantiate the network request(created) 
-    this.getUserList()  
+  componentDidMount() { //  This is a good place to instantiate the network request(created)
+    this.getUserList()
   }
-  
+
   componentDidUpdate(prevProps) {
     // 典型用法（不要忘记比较 props）：当修改用户信息时，重新加载
     if (this.props.userID !== prevProps.userID) {
@@ -130,7 +130,7 @@ class BrandList extends Component {
       isShowFormAdd: visible,
     })
   }
-  
+
   /**
    * 关闭用户信息模态框
    */
@@ -167,21 +167,21 @@ class BrandList extends Component {
       key: 0,
       date: '2019-10-16 08:54:09',
       name: '108匠',
-      image: 'http://img2.imgtn.bdimg.com/it/u=261207652,4063938572&fm=26&gp=0.jpg',
+      image: 'https://hbimg.huabanimg.com/580d8a14a5fe31eec3f4d0be657515ddcd88b24fa5c0a-kTSX3e_fw236',
       note: '这是一段描述内容,这是一段描述内容,这是一段描述内容,这是一段描述内容.',
     },
     {
       key: 1,
       date: '2019-10-16 08:54:09',
       name: '咪咕烤鱼',
-      image: 'http://img0.imgtn.bdimg.com/it/u=2703858994,1545424298&fm=26&gp=0.jpg',
+      image: 'https://hbimg.huabanimg.com/580d8a14a5fe31eec3f4d0be657515ddcd88b24fa5c0a-kTSX3e_fw236',
       note: '这是一段描述内容,这是一段描述内容,这是一段描述内容,这是一段描述内容.',
     },
     {
       key: 2,
       name: '蘑菇香香鸡',
       date: '2019-10-16 08:54:09',
-      image: 'http://img1.imgtn.bdimg.com/it/u=175316181,3173274562&fm=15&gp=0.jpg',
+      image: 'https://hbimg.huabanimg.com/580d8a14a5fe31eec3f4d0be657515ddcd88b24fa5c0a-kTSX3e_fw236',
       note: '这是一段描述内容,这是一段描述内容,这是一段描述内容,这是一段描述内容.',
     },
   ];
@@ -196,7 +196,7 @@ class BrandList extends Component {
       return { columns: nextColumns };
     });
   };
-  
+
   /**
    * table分页
    */
@@ -207,7 +207,7 @@ class BrandList extends Component {
     console.log(page.current)
     console.log(this.props.user)
   }
-  
+
   onSelectChange = selectedRowKeys => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     this.setState({ selectedRowKeys });
@@ -254,22 +254,22 @@ class BrandList extends Component {
               <Button type='primary' icon='plus' onClick={() => this.togglesShowAddModal(true)}>新增</Button>&emsp;
               <Button type='danger' icon='delete' disabled={!selectedRowKeys.length}>批量删除</Button>
             </div>
-            <Table 
+            <Table
               bordered
-              components={this.components} 
-              columns={columns} 
-              dataSource={this.data} 
+              components={this.components}
+              columns={columns}
+              dataSource={this.data}
               pagination={pagination}
               rowSelection={rowSelection}
               onChange={this.onTableChange}
             />
-          </div>  
+          </div>
         </Card>
         <BrandInfoModal visible={isShowInfoModal} brandInfo={brandInfo} onCancel={this.closeInfoModal} />
         <BrandInfoAdd visible={isShowFormAdd} onCancel={this.closeInfoModal} />
       </div>
-    )  
-  }    
+    )
+  }
 }
 
 export default BrandList

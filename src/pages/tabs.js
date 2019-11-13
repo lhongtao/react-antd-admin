@@ -9,6 +9,7 @@ const BackToTop = LoadableComponent(import('@/components/BackToTop/index'), true
 const ErrorThird = LoadableComponent(import('@/components/Result/R403'), true);
 const ErrorFour = LoadableComponent(import('@/components/Result/R404'), true);
 const Tinymce = LoadableComponent(import('@/components/Tinymce/index'), true);
+const DndList = LoadableComponent(import('@/components/DndList/index'), true);
 
 const menu = [
   {
@@ -126,6 +127,7 @@ const tabs = {
   ErrorFour: <ErrorFour />,
   ErrorThird: <ErrorThird />,
   Tinymce: <Tinymce />,
+  DndList: <DndList />
 }
 
 export { menu,tabs }
