@@ -68,7 +68,7 @@ class DndList extends React.Component {
     return (
       <div style={{ padding: 24 }}>
         <Card bordered={false}>
-          <h3>本文选择的是react-beautiful-dnd.</h3>
+          <h3>react-beautiful-dnd.</h3>
           <Divider>列表拖拽</Divider>
           <div className="dnd-wrapper">
             <DragDropContext onDragEnd={this.onDragEnd}>
