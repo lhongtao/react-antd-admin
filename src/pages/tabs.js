@@ -127,7 +127,7 @@ const tabs = {
   ErrorFour: <ErrorFour />,
   ErrorThird: <ErrorThird />,
   Tinymce: <Tinymce />,
-  DndList: <DndList />
+  DndList: <Tinymce />
 }
 
 export { menu,tabs }
