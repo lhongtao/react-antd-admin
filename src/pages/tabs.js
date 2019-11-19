@@ -27,26 +27,21 @@ const menu = [
     icon: 'appstore',
     key: 'components',
     children: [
-      {
-        name: '富文本编辑器',
-        icon: '',
-        key: 'Tinymce',
-      },
       // {
-      //   name: 'MarkDown',
+      //   name: '富文本编辑器',
       //   icon: '',
-      //   key: 'MarkDown',
+      //   key: 'Tinymce',
       // },
-      {
-        name: '头像上传',
-        icon: '',
-        key: 'AvatarUpload',
-      },
-      {
-        name: '列表拖拽',
-        icon: '',
-        key: 'DndList',
-      },
+      // {
+      //   name: '头像上传',
+      //   icon: '',
+      //   key: 'AvatarUpload',
+      // },
+      // {
+      //   name: '列表拖拽',
+      //   icon: '',
+      //   key: 'DndList',
+      // },
       // {
       //   name: '返回顶部',
       //   icon: '',
@@ -127,7 +122,7 @@ const tabs = {
   ErrorFour: <ErrorFour />,
   ErrorThird: <ErrorThird />,
   Tinymce: <Tinymce />,
-  DndList: <Tinymce />
+  DndList: <DndList />
 }
 
 export { menu,tabs }
