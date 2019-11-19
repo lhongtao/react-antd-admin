@@ -27,21 +27,21 @@ const menu = [
     icon: 'appstore',
     key: 'components',
     children: [
-      // {
-      //   name: '富文本编辑器',
-      //   icon: '',
-      //   key: 'Tinymce',
-      // },
-      // {
-      //   name: '头像上传',
-      //   icon: '',
-      //   key: 'AvatarUpload',
-      // },
-      // {
-      //   name: '列表拖拽',
-      //   icon: '',
-      //   key: 'DndList',
-      // },
+      {
+        name: '富文本编辑器',
+        icon: '',
+        key: 'Tinymce',
+      },
+      {
+        name: '头像上传',
+        icon: '',
+        key: 'AvatarUpload',
+      },
+      {
+        name: '列表拖拽',
+        icon: '',
+        key: 'DndList',
+      },
       // {
       //   name: '返回顶部',
       //   icon: '',
