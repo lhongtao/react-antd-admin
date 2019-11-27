@@ -5,12 +5,14 @@ const About = LoadableComponent(import('./About/index'), true);
 const MessageBoard = LoadableComponent(import('./MessageBoard/index'), true);
 const Home = LoadableComponent(import('./Home/index'), true);
 const System = LoadableComponent(import('./System/index'), true);
+const Chat = LoadableComponent(import('./Chat/index'), true);
 const BrandList = LoadableComponent(import('@/views/brand/BrandList'), true);
 const BackToTop = LoadableComponent(import('@/components/BackToTop/index'), true);
 const ErrorThird = LoadableComponent(import('@/components/Result/R403'), true);
 const ErrorFour = LoadableComponent(import('@/components/Result/R404'), true);
 const Tinymce = LoadableComponent(import('@/components/Tinymce/index'), true);
 const DndList = LoadableComponent(import('@/components/DndList/index'), true);
+
 
 const menu = [
   {
@@ -107,6 +109,11 @@ const menu = [
     key: 'System',
   },
   {
+    name: '聊天室',
+    icon: 'qq',
+    key: 'Chat'
+  },
+  {
     name: '留言板',
     icon: 'message',
     key: 'MessageBoard'
@@ -129,7 +136,8 @@ const tabs = {
   ErrorFour: <ErrorFour />,
   ErrorThird: <ErrorThird />,
   Tinymce: <Tinymce />,
-  DndList: <DndList />
+  DndList: <DndList />,
+  Chat: <Chat />,
 }
 
 export { menu,tabs }

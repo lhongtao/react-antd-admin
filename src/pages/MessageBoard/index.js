@@ -8,7 +8,7 @@ import BraftEditor from 'braft-editor'
 import { ContentUtils } from 'braft-utils'
 import { withRouter } from 'react-router-dom'
 import LoadableComponent from '@/utils/LoadableComponent'
-import { createMessage,getMessageBoard } from "@/api/common"
+import { createMessage, getMessageBoard } from "@/api/common"
 
 const { TextArea } = Input;
 const store = connect(
@@ -94,7 +94,6 @@ class MessageBoard extends Component {
   getMessages = async () => {
     // const res = await getMessageBoard()
     const res = ''
-    console.log('111111')
     this.setState({
         messages: res.data || [
           {

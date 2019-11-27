@@ -17,3 +17,18 @@ export function getMessageBoard() {
   })
 }
 
+// 获得聊天记录列表
+export function getChatList() {
+  return request({
+    url: '/chat/list',
+    method: 'get',
+  })
+}
+
+// 获取用户
+export function getAllUserList() {
+  return request({
+    url: '/user/getAllUsers',
+    method: 'get'
+  })
+}
