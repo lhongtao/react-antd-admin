@@ -18,3 +18,19 @@ export function getUser(param) {
     dispatch(setUser(res || { username: '张三' }))
   }
 }
+
+export const SET_CHATLIST = 'SET_CHATLIST'
+export function setChatList(chatList) {
+    return {
+        type: SET_CHATLIST,
+        chatList
+    }
+}
+
+export const ADD_CHAT = 'ADD_CHAT'
+export function addChat(chat) {
+    return {
+        type: ADD_CHAT,
+        chat
+    }
+}

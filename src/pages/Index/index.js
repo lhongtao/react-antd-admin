@@ -26,10 +26,7 @@ class Index extends React.Component {
   componentDidMount() {
     this.init()
   }
-  componentWillMount() {
-    // const websocket = this.props.websocket
-    // websocket && websocket.close()
-  }
+  
   /**
    * 初始化用户信息和建立websocket连接
    */

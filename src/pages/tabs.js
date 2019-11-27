@@ -2,6 +2,7 @@ import React from 'react'
 import LoadableComponent from '../utils/LoadableComponent'
 const Users = LoadableComponent(import('./Users/index'), true);
 const About = LoadableComponent(import('./About/index'), true);
+const MessageBoard = LoadableComponent(import('./MessageBoard/index'), true);
 const Home = LoadableComponent(import('./Home/index'), true);
 const System = LoadableComponent(import('./System/index'), true);
 const BrandList = LoadableComponent(import('@/views/brand/BrandList'), true);
@@ -106,6 +107,11 @@ const menu = [
     key: 'System',
   },
   {
+    name: '留言板',
+    icon: 'message',
+    key: 'MessageBoard'
+  },
+  {
     name: '关于',
     icon: 'info-circle',
     key: 'About'
@@ -115,6 +121,7 @@ const menu = [
 const tabs = {
   Users: <Users />,
   About: <About />,
+  MessageBoard: <MessageBoard />,
   Home: <Home />,
   System: <System />,
   BrandList: <BrandList />,
