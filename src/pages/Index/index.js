@@ -4,13 +4,13 @@ import Mysider from './MySider'
 import MyHeader from './MyHeader'
 import MyContent from './MyContent'
 import './style.less'
-import { getUser } from '@/store/actions'
+import { getUser, initWebsocket } from '@/store/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const store = connect(
-  (state) => ({ user: state.user }),
-  (dispatch) => bindActionCreators({ getUser }, dispatch)
+  (state) => ({ user: state.user, websocket: state.websocket }),
+  (dispatch) => bindActionCreators({ getUser, initWebsocket }, dispatch)
 )
 
 const { Header, Sider, Content } = Layout
@@ -34,7 +34,7 @@ class Index extends React.Component {
     const username = localStorage.getItem('username')
     await this.props.getUser({ username })
     console.log(this.props.user)
-    // this.props.initWebSocket(this.props.user)
+    this.props.initWebsocket(this.props.user)
   }
   _setState = (obj) => {
     this.setState(obj)

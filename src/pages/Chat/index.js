@@ -22,6 +22,7 @@ class Chat extends React.Component {
     userList: [], //所有用户列表
   }
   componentDidMount() {
+    console.log(this.props.websocket)
     if (this.props.websocket && this.props.websocket.readyState !== 1) {
       this.props.initWebsocket(this.props.user)
     }
@@ -68,10 +69,44 @@ class Chat extends React.Component {
     })
   }
 
+  handleEditorChange = (editorState) => {
+    this.setState({ editorState })
+  }
+  //定制键盘命令
+  handleKeyCommand = (command) => {
+    //如果是回车命名就发送信息
+    if (command === 'split-block') {
+        this.onSend()
+        return 'handled';
+    }
+    return 'not-handled';
+  }
+
+  onSend = () => {
+    const editorState = this.state.editorState
+    const htmlContent = editorState.toHTML()
+    const websocket = this.props.websocket
+
+    if (editorState.isEmpty()) {
+        return message.warning('请先输入聊天内容')
+    }
+    console.log(websocket)
+    if (websocket.readyState !== 1) {
+        //断开连接，重新连接
+        this.props.initWebsocket(this.props.user)
+        return message.warning('消息发送失败，请重新发送')
+    }
+    websocket.send(JSON.stringify({ content: htmlContent }))
+    this.setState({
+      editorState: ContentUtils.clear(this.state.editorState)
+        // editorState: BraftEditor.createEditorState(null)    //用这种方法清空富文本编辑器，在下次输入时光标容易跳动
+    })
+  }
+
   render() {
     const { editorState, userList } = this.state
     const { chatList, user, onlineList } = this.props
-    const controls = ['emoji', 'italic', 'text-color', 'separator', 'link', 'separator', 'media']
+    const controls = ['emoji', 'italic', 'text-color', 'separator', 'separator']
     return (
       <div className='chat-container' ref={el => this.chatContainer = el}>
         <div className='chat-box' ref={el => this.chatBox = el}>
@@ -87,13 +122,56 @@ class Chat extends React.Component {
             </div>
           </div>
           <div className='chat-body'>
-            <div>
-              
+            <div className='main'>
+              <div className='chat-list' ref={el => this.chatListDom = el}>
+                {chatList && chatList.map((item, index) => (
+                    <div key={item.id} className='chat-item'>
+                          {/* 两条消息记录间隔超过3分钟就显示时间 */}
+                            {(index === 0 || item.createTime - chatList[index - 1].createTime > 3 * 60 * 1000) && (
+                                <div className='time'>{this.handleTime(item.createTime)}</div>
+                            )}
+                            <div className={`chat-item-info ${user.id === item.userId ? 'chat-right' : ''}`}>
+                                <div><Avatar src={item.userAvatar} /></div>
+                                <div className='chat-main'>
+                                    <div className='username'>{item.username}</div>
+                                    <div className='chat-content' dangerouslySetInnerHTML={{ __html: item.content }} />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className='chat-editor-wrapper'>
+                  <BraftEditor
+                    draftProps={{ handleKeyCommand: this.handleKeyCommand }}
+                    value={editorState}
+                    onChange={this.handleEditorChange}
+                    contentStyle={styles.contentStyle}
+                    controlBarStyle={styles.controlBarStyle}
+                    controls={controls}
+                  />
+              </div>
             </div>
           </div>
         </div>
       </div>
     )
+  }
+}
+
+const styles = {
+  contentStyle: {
+      height: 100,
+      paddingBottom: 0,
+      transform: 'translateY(-15px)',
+      fontSize: 14
+  },
+  controlBarStyle: {
+      boxShadow: 'none'
+  },
+  center: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
   }
 }
 

@@ -48,7 +48,21 @@ export function getUser(param) {
   return async function (dispatch) {
     // const res = await json.get('/user/getUser', param)
     const res = 0
-    dispatch(setUser(res || { username: '张三' }))
+    dispatch(setUser(res || { 
+      avatar: "http://47.99.130.140:8888/public/images/default.png",
+      birth: null,
+      gender: null,
+      id: 211,
+      isAdmin: 0,
+      lastLoginAddress: {"ip":"119.251.19.174","location":{"lat":39.98246,"lng":117.07822},"ad_info":{"nation":"中国","province":"河北省","city":"廊坊市","district":"三河市","adcode":131082}},
+      lastLoginTime: 1574932060130,
+      location: null,
+      phone: null,
+      registrationAddress: {"ip":"43.228.36.158","location":{"lat":39.90469,"lng":116.40717},"ad_info":{"nation":"中国","province":"北京市","city":"北京市","district":"","adcode":110000}},
+      registrationTime: 1566289120194,
+      username: "zhangsan",
+    }
+  ))
   }
 }
 
